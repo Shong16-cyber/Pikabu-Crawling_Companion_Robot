@@ -51,6 +51,9 @@ class BabySocialRobot(Node):
         self.wander_collision_risk = False
         self.wander_path_blocked = False
         self.min_dist_all = 999.0
+        self.front_dist = 999.0
+        self.left_dist = 999.0
+        self.right_dist = 999.0
         
         # --- 📸 调试配置 ---
         self.save_dir = os.path.join(base_dir, "debug_photos")
@@ -74,22 +77,58 @@ class BabySocialRobot(Node):
         
         self.timer = self.create_timer(0.1, self.control_loop)
         self.get_logger().info("✅ 终极全功能版：漫游 + 避障 + 视觉社交 已启动！")
-
+   
     def scan_cb(self, msg):
-        # 1. 360度全方位雷达数据
+        # ==============================
+        # 1️⃣ 360° 全局安全检测
+        # ==============================
         all_ranges = [r for r in msg.ranges if 0.1 < r < 3.5]
+
         if all_ranges:
             self.min_dist_all = min(all_ranges)
+
+            # 🚨 硬刹车（最高优先级）
             self.critical_collision = self.min_dist_all < self.HARD_STOP_DIST
+
+            # ⚠️ 漫游风险（全方向）
             self.wander_collision_risk = self.min_dist_all < self.WANDER_CRITICAL_DIST
         else:
             self.min_dist_all = 999.0
             self.critical_collision = False
             self.wander_collision_risk = False
 
-        # 2. 逻辑前方雷达数据 (物理后方 140-220度)
+        # ==============================
+        # 2️⃣ 前方检测（决定“能不能直走”）
+        # ==============================
         front_ranges = [r for r in msg.ranges[140:220] if 0.1 < r < 3.5]
-        self.wander_path_blocked = bool(front_ranges and min(front_ranges) < self.WANDER_PATH_DIST)
+
+        if front_ranges:
+            self.front_dist = min(front_ranges)
+            self.wander_path_blocked = self.front_dist < self.WANDER_PATH_DIST
+        else:
+            self.front_dist = 999.0
+            self.wander_path_blocked = False
+
+        # ==============================
+        # 3️⃣ 左侧检测（用于绕路决策）
+        # ==============================
+        left_ranges = [r for r in msg.ranges[60:120] if 0.1 < r < 3.5]
+
+        if left_ranges:
+            self.left_dist = min(left_ranges)
+        else:
+            self.left_dist = 999.0
+
+        # ==============================
+        # 4️⃣ 右侧检测（用于绕路决策）
+        # ==============================
+        right_ranges = [r for r in msg.ranges[240:300] if 0.1 < r < 3.5]
+
+        if right_ranges:
+            self.right_dist = min(right_ranges)
+        else:
+            self.right_dist = 999.0
+
     
     def img_cb(self, data):
         try:
@@ -187,9 +226,41 @@ class BabySocialRobot(Node):
                     self.is_wander_turning = False
 
         # --- 📝 日志输出模块 ---
-        if int(now * 10) % 10 == 0: # 每秒打印一次状态
-            baby_info = f"{self.detected_dist:.2f}m" if logic_present else "未检测到"
-            log_msg = f"👉 状态: [{self.state}] | 宝宝距离: {baby_info} | 最近雷达: {self.min_dist_all:.2f}m"
+        if int(now * 10) % 10 == 0:
+
+            baby_info = f"{self.detected_dist:.2f}m" if logic_present else "None"
+
+            # 判断当前“子行为”
+            sub_state = "IDLE"
+
+            if self.state == "WANDER":
+                if self.wander_collision_risk or self.wander_path_blocked:
+                    if self.min_dist_all < 0.25:
+                        sub_state = "EMERGENCY_AVOID"
+                    else:
+                        sub_state = "AVOID_TURN"
+                elif not self.is_wander_turning:
+                    sub_state = "FORWARD"
+                else:
+                    sub_state = "TURNING"
+
+            elif self.state == "RUN_AWAY":
+                sub_state = "ESCAPING"
+
+            elif self.state == "INTERACT":
+                sub_state = "SPIN_INTERACT"
+
+            elif self.state == "APPROACH":
+                sub_state = "APPROACHING"
+
+            log_msg = (
+                f"\n"
+                f"🧠 STATE: {self.state} | {sub_state}\n"
+                f"👶 Baby: {baby_info} | Seen: {self.is_person_present}\n"
+                f"📏 Distances -> Front: {self.front_dist:.2f} | Left: {self.left_dist:.2f} | Right: {self.right_dist:.2f} | Min: {self.min_dist_all:.2f}\n"
+                f"🚧 Blocked -> Front: {self.wander_path_blocked} | Risk: {self.wander_collision_risk}\n"
+            )
+
             self.get_logger().info(log_msg)
 
         # 3. 执行状态动作
@@ -214,10 +285,20 @@ class BabySocialRobot(Node):
             
             # 漫游时遇到障碍物：停下并亮警告灯
             if self.wander_collision_risk or self.wander_path_blocked:
-                twist.linear.x = 0.0
-                twist.angular.z = 0.0
-                self.send_light("RED" if self.wander_path_blocked else "BLUE")
-                
+
+                if self.min_dist_all < 0.25:
+                    twist.linear.x = 0.05
+                    twist.angular.z = self.TURN_SPEED if self.left_dist > self.right_dist else -self.TURN_SPEED
+                    self.send_light("RED")
+
+                else:
+                    twist.linear.x = 0.0
+                    twist.angular.z = self.WANDER_TURN_SPEED if self.left_dist > self.right_dist else -self.WANDER_TURN_SPEED
+                    self.send_light("PURPLE")
+
+                self.cmd_pub.publish(twist)
+                return   # 🚨🚨🚨 关键！！
+                            
             # 正常漫游：直走
             elif not self.is_wander_turning:
                 if wander_elapsed < self.WANDER_TIME:
