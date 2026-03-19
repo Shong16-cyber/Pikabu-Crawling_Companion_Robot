@@ -1,4 +1,4 @@
-# Pikabu: A Companion Robot for Playing with Crawling Babies
+# Pikabu: An Adaptive Companion Robot for Crawling Babies
 
 **Contributor**: Suzy & Shirley
 
@@ -15,18 +15,22 @@
 
 ## 📖 Description
 
-**Pikabu** is an interactive, autonomous companion robot built on the TurtleBot3 platform, designed to interact with a crawling baby. It combines 2D Lidar-based navigation with YOLOv8-powered computer vision to create a dynamic social state machine.
+**Pikabu** is an **adaptive social robot** designed to be the ultimate interactive companion for crawling babies. Built on the TurtleBot3 platform, it beautifully bridges the gap between autonomous robotics and human-computer interaction.
 
-The robot autonomously patrols the room while actively avoiding obstacles like furniture and walls. Once it visually detects the baby, it switches from "Wander Mode" to "Social Mode," adjusting its distance and behavior based on how close the baby is. It uses an expressive LED strip and a waving mechanical arm to communicate its current "mood" and intent.
+While Pikabu is a fully autonomous platform—using 2D Lidar to explore rooms and safely avoid obstacles—its true magic lies in its **adaptive social state machine**. Powered by a YOLOv8 vision model, Pikabu doesn't just see the world; it responds to it.
 
-**Core Behaviors:**
+It combines 2D Lidar-based navigation with YOLOv8-powered computer vision to create a dynamic social state machine.
+
+Once it detects a baby, Pikabu dynamically transitions from "Wander Mode" to "Social Mode." It continuously calculates the physical distance between itself and the child, adapting its behavior in real-time:
+* 🟢 **Green (Wandering):** Autonomously patrols the space looking for a playmate.
+* 🔴 **Red / 🟣 Purple (Adaptive Avoidance):** Intelligently navigates away from walls and dead ends.
+* 🟡 **Yellow (Approaching):** Spots the baby from afar and actively moves closer while waving.
+* 🌈 **Rainbow (Interacting):** Reaches the perfect social distance, spinning joyfully to engage the baby.
+* 🔵 **Blue (Escaping):** Respectfully backs away to give the baby personal space if they get too close.
+
+Through its expressive LED lighting and a waving mechanical arm, Pikabu communicates its "moods" and intents clearly, creating a safe, responsive, and delightful play experience.
+
 Feel free to walk around Pikabu and see its changes!
-
-  * 🟢 **Green (Wandering):** Patrols the area looking for the baby.
-  * 🔴 **Red / 🟣 Purple (Obstacle Avoidance):** Intelligently turns away from walls or spins out of dead ends.
-  * 🟡 **Yellow (Approaching):** Spots the baby from afar and moves closer while waving.
-  * 🌈 **Rainbow (Interacting):** Reaches the perfect social distanc, waves, and spins joyfully.
-  * 🔵 **Blue (Escaping):** Backs away to give the baby personal space if they get too close.
 
 ## 🎥 Video Demo
 
