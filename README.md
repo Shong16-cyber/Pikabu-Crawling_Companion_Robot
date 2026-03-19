@@ -1,26 +1,28 @@
-# 🤖 Crawling Companion: Baby Social Robot
+# Pikabu: A Companion Robot for Playing with Crawling Babies
+
+**Contributor**: Suzy & Shirley
 
 *(Note: Replace `your_photo_name.jpg` with your actual image file name in the asset folder)*
 
 ## 📖 Description
 
-The **Baby Social Robot** is an interactive, autonomous companion built on the TurtleBot3 platform, designed to interact with a crawling baby. It combines 2D Lidar-based navigation with YOLOv8-powered computer vision to create a dynamic social state machine.
+**Pikabu** is an interactive, autonomous companion robot built on the TurtleBot3 platform, designed to interact with a crawling baby. It combines 2D Lidar-based navigation with YOLOv8-powered computer vision to create a dynamic social state machine.
 
 The robot autonomously patrols the room while actively avoiding obstacles like furniture and walls. Once it visually detects the baby, it switches from "Wander Mode" to "Social Mode," adjusting its distance and behavior based on how close the baby is. It uses an expressive LED strip and a waving mechanical arm to communicate its current "mood" and intent.
 
 **Core Behaviors:**
+Feel free to walk around Pikabu and see its changes!
 
   * 🟢 **Green (Wandering):** Patrols the area looking for the baby.
   * 🔴 **Red / 🟣 Purple (Obstacle Avoidance):** Intelligently turns away from walls or spins out of dead ends.
   * 🟡 **Yellow (Approaching):** Spots the baby from afar and moves closer while waving.
-  * 🌈 **Rainbow (Interacting):** Reaches the perfect social distance (1.5m - 3.0m), waves, and spins joyfully.
-  * 🔵 **Blue (Escaping):** Backs away to give the baby personal space if they get too close (\< 1.5m).
+  * 🌈 **Rainbow (Interacting):** Reaches the perfect social distanc, waves, and spins joyfully.
+  * 🔵 **Blue (Escaping):** Backs away to give the baby personal space if they get too close.
 
 ## 🎥 Video Demo
 
-[Click here to watch the Video Demo](https://www.google.com/search?q=%23) *(Link coming soon)*
+(https://youtube.com/shorts/0-G2_wm7jlk?si=foUjVEDs8F5l11_5)
 
------
 
 ## ⚙️ Setup Instructions
 
@@ -38,7 +40,6 @@ The robot autonomously patrols the room while actively avoiding obstacles like f
 2.  The YOLOv8 model (`yolov8n.pt`) must be placed in the same directory as the main execution script.
 3.  The LED background service (`host_led_service.py`) must be configured on the Raspberry Pi host machine.
 
------
 
 ## 🚀 Usage Instructions
 
