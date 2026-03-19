@@ -1,0 +1,16 @@
+Ini, TOML
+[Unit]
+Description=TurtleBot3 Lightning Bridge
+After=network.target
+
+[Service]
+# change `robot-3` to your username, make sure you put host_led_service in the correct place
+ExecStart=/usr/bin/python3 /home/robot-3/host_led_service.py
+WorkingDirectory=/home/robot-3
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

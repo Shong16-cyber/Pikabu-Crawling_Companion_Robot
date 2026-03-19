@@ -56,6 +56,12 @@ ssh robot-3@<your_robot_ip>
 ros2 launch turtlebot3_gix_bringup hardware.launch.py
 ```
 
+If by chance your camera lost connection, you could use
+```
+source install/setup.bash
+```
+to reconnect it.
+
 *(Leave this terminal running in the background)*
 
 ### Step 2： LED Setup Instructions
@@ -69,12 +75,16 @@ We have provided a background service setup in the `resource` folder. Please exe
    sudo pip3 install rpi_ws281x adafruit-circuitpython-neopixel
    ```
 
-2. **Copy the service file to the systemd directory:**
+2. **Copy the configuration files to your system:**
    ```
-   
+   # 1. Copy the Python script to the home directory
+   cp ~/robot3_ws/src/t516_project/crawling_companion/resource/host_led_service.py /home/robot-3/host_led_service.py
+
+   # 2. Copy the background service configuration to the system folder
+   sudo cp ~/robot3_ws/src/t516_project/crawling_companion/resource/robot_led.service /etc/systemd/system/
    ```
 
-3. **Reload systemd, enable, and start the service:**
+3. **Activate and start the background service:**
    ```bash
    sudo systemctl daemon-reload
    sudo systemctl enable robot_led.service
@@ -88,9 +98,6 @@ We have provided a background service setup in the `resource` folder. Please exe
    *(You should see "Active: active (running)" in green).*
 ```
 
-这样写的话，其他开发者拿到你的代码后，只需要按照 README 里的这 4 步走，就能完美点亮他们机器人的物理指示灯，并且配合你写的完美的 Docker 大脑代码一起运行了！
-
-**需要我帮你把这些补充内容，和上一条完整的 README 拼成一个最终的合并版本吗？**
 
 ### Step 3: Run the Brain inside the Docker Container
 
