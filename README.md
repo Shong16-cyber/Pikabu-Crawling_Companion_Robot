@@ -5,7 +5,7 @@
 <table style="width: 100%; border-collapse: collapse;">
   <tr>
     <td style="width: 50%; text-align: center;">
-      <img src="src/t516_project/assets/1.jpg" width="100%" />
+      <img src="src/t516_project/assets/1.jpg" width="95%" />
       <p><b>Pikabu</b></p>
     </td>
     <td style="width: 50%; text-align: center;">
@@ -15,7 +15,8 @@
   </tr>
 </table>
 
-<p align="center">
+<p>
+<align="center">
   <img src="src/t516_project/asset/1.jpg" width="80%" />
   <br>
   <img src="src/516_project/asset/2.png" width="80%" />
