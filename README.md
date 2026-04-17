@@ -1,6 +1,6 @@
 # Pikabu: An Adaptive Companion Robot for Crawling Babies
 
-**Contributor**: Suzy & Shirley
+**Contributor**: Shuxian(Suzy) & Shirley
 
 
 <div align="center">
