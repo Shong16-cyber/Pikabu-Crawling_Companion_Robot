@@ -5,12 +5,9 @@
 
 **My role**
 
-- **Motion control:** differential-drive velocity commands with per-state linear and angular speed profiles, lidar-driven steering toward whichever side has more clearance, and a layered safety envelope that halts the base at 0.2 m
-- **Behavior design:** the 5-state system (wander, avoid, approach, interact, retreat), where obstacle avoidance always overrides social behavior
-- **System bring-up:** brought the robot up one subsystem at a time, with standalone lidar, drive, arm, and vision test rigs before integrating
-- **CAD and prototyping:** designed the internal component layout and exterior form in CAD, then 3D-printed the housing
-- **Interaction design:** LED color and arm gestures that make the robot's state readable to a caregiver at a glance
-
+- **Control design:** structured the logic as a 5-state behavior system (wander, avoid, approach, interact, retreat) that switches on the baby's distance from the camera, with tuned per-state speeds where avoidance always overrides play
+- **System bring-up:** brought the robot up one subsystem at a time, testing lidar, drive, arm, and vision before integrating
+- **CAD and prototyping:** designed the internal component layout and exterior form in CAD and 3D-printed the housing, packaging the lidar, camera, arm, and controller while keeping the lidar sweep and camera view unobstructed
 
 <div align="center">
   <img src="src/t516_project/assets/1.jpg" width="60%" />
