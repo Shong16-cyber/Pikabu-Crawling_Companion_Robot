@@ -1,6 +1,14 @@
 # Pikabu: An Adaptive Companion Robot for Crawling Babies
 
-**Contributor**: Shuxian(Suzy) & Shirley
+**Contributor**: Shuxian (Suzy) Hong & Shirley
+**Time**: 01/2026 - 03/2026
+
+**My role**
+
+- **Control design:** the 5-state behavior system (wander, avoid, approach, interact, retreat), where obstacle avoidance always overrides social behavior
+- **System bring-up:** brought the robot up one subsystem at a time, with standalone lidar, drive, arm, and vision test rigs before integrating
+- **CAD and prototyping:** designed the internal component layout and exterior form in CAD, then 3D-printed the housing
+- **Interaction design:** LED color and arm gestures that make the robot's state readable to a caregiver at a glance
 
 
 <div align="center">
@@ -17,7 +25,7 @@
 
 **Pikabu** is an **adaptive social robot** designed to be the ultimate interactive companion for crawling babies. Built on the TurtleBot3 platform, it beautifully bridges the gap between autonomous robotics and human-computer interaction.
 
-While Pikabu is a fully autonomous platform—using 2D Lidar to explore rooms and safely avoid obstacles—its true magic lies in its **adaptive social state machine**. Powered by a YOLOv8 vision model, Pikabu doesn't just see the world; it responds to it.
+While Pikabu is a fully autonomous platform-using 2D Lidar to explore rooms and safely avoid obstacles-its true magic lies in its **adaptive social state machine**. Powered by a YOLOv8 vision model, Pikabu doesn't just see the world; it responds to it.
 
 It combines 2D Lidar-based navigation with YOLOv8-powered computer vision to create a dynamic social state machine.
 
