@@ -3,7 +3,7 @@
 **Contributor**: Shuxian (Suzy) Hong & Shirley  
 **Time**: 01/2026 - 03/2026
 
-**My role**
+### My role
 
 - **Control design:** structured the logic as a 5-state behavior system (wander, avoid, approach, interact, retreat) that switches on the baby's distance from the camera, with tuned per-state speeds where avoidance always overrides play
 - **System bring-up:** brought the robot up one subsystem at a time, testing lidar, drive, arm, and vision before integrating
