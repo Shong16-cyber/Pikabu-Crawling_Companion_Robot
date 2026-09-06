@@ -13,11 +13,13 @@
   <img src="docs/fig-cover.png" width="100%" />
 </div>
 
-## 📖 Description
+## 🧩 The Problem
 
 <div align="center">
   <img src="docs/fig-problem.png" width="100%" />
 </div>
+
+## 📖 What Pikabu Does
 
 **Pikabu** is an **adaptive social robot** designed to be the ultimate interactive companion for crawling babies. Built on the TurtleBot3 platform, it beautifully bridges the gap between autonomous robotics and human-computer interaction.
 
@@ -36,20 +38,20 @@ Through its expressive LED lighting and a waving mechanical arm, Pikabu communic
 
 Feel free to walk around Pikabu and see its changes!
 
-## Key features
+## ✨ Key Features
 
 - **Proactive avoidance:** steers away from obstacles using lidar well before contact, with a hard stop at 0.2 m
 - **Adaptive speed:** speed is set per behavior state rather than fixed, so Pikabu retreats about three times faster than it wanders once the infant gets too close
 - **Sensory attraction:** LED color and a waving arm signal what the robot is doing, so a caregiver can read its intent at a glance
 
-## How it works
+## 🔄 How It Works
 
 <div align="center">
   <img src="docs/fig-control-flow.png" width="100%" />
   <p><i>Continuous sense, think, act loop. Obstacle avoidance stays active across every state.</i></p>
 </div>
 
-## Hardware architecture
+## 🔧 Hardware Architecture
 
 <div align="center">
   <img src="docs/fig-hardware.png" width="100%" />
