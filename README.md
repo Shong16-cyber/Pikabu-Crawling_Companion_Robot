@@ -41,6 +41,26 @@ Through its expressive LED lighting and a waving mechanical arm, Pikabu communic
 
 Feel free to walk around Pikabu and see its changes!
 
+## Key features
+
+- **Proactive avoidance:** steers away from obstacles using lidar well before contact, with a hard stop at 0.2 m
+- **Adaptive speed:** speed is set per behavior state rather than fixed, so Pikabu retreats about three times faster than it wanders once the infant gets too close
+- **Sensory attraction:** LED color and a waving arm signal what the robot is doing, so a caregiver can read its intent at a glance
+
+## How it works
+
+<div align="center">
+  <img src="docs/fig-control-flow.png" width="100%" />
+  <p><i>Continuous sense, think, act loop. Obstacle avoidance stays active across every state.</i></p>
+</div>
+
+## Hardware architecture
+
+<div align="center">
+  <img src="docs/fig-hardware.png" width="100%" />
+  <p><i>TurtleBot3 base with Raspberry Pi and OpenCR, plus lidar, camera, servo arm, and LED strip.</i></p>
+</div>
+
 ## 🎥 Video Demo
 
 [![Pikabu Robot Demo](https://img.youtube.com/vi/0-G2_wm7jlk/maxresdefault.jpg)](https://www.youtube.com/shorts/0-G2_wm7jlk)
